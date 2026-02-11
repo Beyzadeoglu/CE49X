@@ -6,7 +6,6 @@
 Department of Civil Engineering, Bogazici University
 
 **Email:** eyuphan.koc@bogazici.edu.tr
-**Office Hours:** Tuesday/Thursday 14:00-15:00
 
 ---
 
@@ -92,7 +91,6 @@ Violations will result in disciplinary action as per university policy.
 
 ## Additional Resources
 
-- **Office Hours:** Tuesday/Thursday 14:00-15:00 (or by appointment)
 - **Software Installation:** [Anaconda](https://www.anaconda.com/download) distribution recommended
 - **Online Resources:** [Python Documentation](https://docs.python.org/3/), [Stack Overflow](https://stackoverflow.com/)
 
