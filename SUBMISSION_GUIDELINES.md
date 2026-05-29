@@ -112,6 +112,18 @@ git push origin main
 2. Include your project notebook, any data files, and a brief README inside the folder
 3. Push before the deadline
 
+#### Final Presentation — Recorded Video
+
+In place of a live demo day, each group submits a **recorded presentation video**:
+
+- **Length:** 10–15 minutes (5–7 min findings & methodology, 3–5 min walkthrough/Q&A-style discussion, 1–2 min conclusions & future outlook)
+- **Format:** screen recording with audio (slides and/or notebook walkthrough; show your dashboard)
+- **Delivery:** email the video (or a shareable link — Google Drive, YouTube unlisted, WeTransfer) to **both**:
+  - Dr. Eyuphan Koc — `eyuphan.koc@bogazici.edu.tr`
+  - Mustafa Özçetin (TA) — `mustafa.ozcetin@std.bogazici.edu.tr`
+- **Subject line:** `CE49X Final Project Video — <Group Member Names>`
+- **Deadline:** same as the repository submission deadline
+
 ---
 
 ## 4. Commit Practices

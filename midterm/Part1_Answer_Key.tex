@@ -1,0 +1,280 @@
+%% CE 49X - Introduction to Computational Thinking and Data Science
+%% Midterm Exam - Part 1 ANSWER KEY
+%% Weeks 1--7
+%% Instructor: Dr. Eyuphan Koc
+%% Bogazici University - Spring 2026
+
+\documentclass[11pt,a4paper]{article}
+
+%% ==================== PACKAGES ====================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage[margin=0.7in,headheight=14pt]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{tcolorbox}
+
+%% Define custom colors
+\definecolor{bunavy}{RGB}{0,20,60}
+\definecolor{softblue}{RGB}{100,140,180}
+\definecolor{codebg}{RGB}{245,245,245}
+\definecolor{answergreen}{RGB}{0,100,0}
+
+%% Listings style for Python
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{gray!50},
+  keywordstyle=\color{blue!70!black},
+  stringstyle=\color{red!60!black},
+  commentstyle=\color{green!50!black},
+  showstringspaces=false,
+  breaklines=true,
+  numbers=none,
+  xleftmargin=4pt,
+  xrightmargin=4pt,
+  aboveskip=8pt,
+  belowskip=8pt
+}
+
+%% Answer box
+\newtcolorbox{answerbox}{
+  colback=green!5!white,
+  colframe=answergreen,
+  title=Answer,
+  fonttitle=\bfseries
+}
+
+%% Set up header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CE 49X - Spring 2026}
+\chead{Midterm Part 1 -- \textcolor{red}{\textbf{ANSWER KEY}}}
+\rhead{Dr. E. Koc}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+%% ==================== DOCUMENT BEGINS ====================
+\begin{document}
+
+\begin{center}
+\Large\textbf{CE 49X: Introduction to Computational Thinking and Data Science}\\[0.1cm]
+\large\textbf{Midterm Exam -- Part 1}\\[0.05cm]
+\large\textcolor{red}{\textbf{--- ANSWER KEY ---}}\\[0.2cm]
+\end{center}
+
+\noindent\rule{\linewidth}{1pt}
+\vspace{0.2cm}
+
+%% ==================== SECTION A: MULTIPLE CHOICE ====================
+\section*{Section A: Multiple Choice [20 points]}
+
+\begin{enumerate}
+\item \textbf{(b) 4} --- \lstinline{range(10)} produces 0--9; values divisible by 3: \{0, 3, 6, 9\} = 4 elements.
+
+\item \textbf{(c)} \lstinline{import numpy as np} --- This creates the alias \lstinline{np} for the numpy module.
+
+\item \textbf{(b)} \lstinline{array([2, 3, 4])} --- Slicing \lstinline{a[1:4]} returns elements at indices 1, 2, 3 (end index is exclusive).
+
+\item \textbf{(b)} \lstinline{df.fillna(method='ffill')} --- Forward fill propagates the last valid value forward. \lstinline{dropna()} removes rows; \lstinline{interpolate()} computes intermediate values; \lstinline{fillna(0)} fills with zero.
+
+\item \textbf{(d) Position} --- Position on a common scale is the most accurate visual encoding channel for quantitative comparison (Cleveland \& McGill hierarchy).
+
+\item \textbf{(b) Data-ink ratio} --- Tufte's principle: maximize the proportion of ink used to display data vs. non-data elements (gridlines, decoration, chart junk).
+
+\item \textbf{(b) 2.0} --- $z = (66 - 50) / 8 = 16 / 8 = 2.0$.
+
+\item \textbf{(b) Reject $H_0$} --- Since $p = 0.03 < \alpha = 0.05$, we reject the null hypothesis. Note: (a) is a common misconception; p-value is NOT the probability that $H_0$ is true.
+
+\item \textbf{(b) It never identifies the dangerous 5\%} --- This is the ``accuracy trap.'' A model that always predicts the majority class achieves high accuracy but has zero recall for the minority class. It is useless for detecting the cases that matter.
+
+\item \textbf{(b) Features are conditionally independent given the class} --- The ``naive'' assumption is that $P(f_1, f_2, \ldots, f_n | L) = \prod_i P(f_i | L)$. This simplifies computation but is rarely true in practice.
+\end{enumerate}
+
+\newpage
+%% ==================== SECTION B: WRITTEN QUESTIONS ====================
+\section*{Section B: Written Questions [30 points]}
+
+\subsection*{Question 1: Code Tracing \& Debugging [6 points]}
+
+\noindent\textbf{(a) (3 points)}
+
+\begin{answerbox}
+The list comprehension filters beams $> 5.0$: \lstinline{[7.2, 12.1, 6.3]}.\\
+\lstinline{total = 7.2 + 12.1 + 6.3 = 25.6}, \lstinline{count = 3}.
+
+Output:
+\begin{lstlisting}[backgroundcolor=\color{white},frame=none]
+Found 3 beams totaling 25.6 m
+Average: 8.53 m
+\end{lstlisting}
+
+\textbf{Grading:} 1 pt for correct list comprehension result, 1 pt for first line, 1 pt for second line with correct formatting.
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\noindent\textbf{(b) (3 points)}
+
+\begin{answerbox}
+\textbf{Bug:} The function uses the SPT-N value \lstinline{n} as the dictionary key. When duplicate values appear in the input (5 appears twice, 25 appears twice), the second occurrence overwrites the first. The dictionary ends up with only 3 unique keys: \{5: `soft', 25: `medium', 40: `hard'\}.
+
+\textbf{Current output:} \lstinline{3} (instead of the expected 5).
+
+\textbf{Fix:} Use a list instead of a dict, or use enumerate to create unique keys:
+\begin{lstlisting}[backgroundcolor=\color{white},frame=none]
+results = []               # Use a list instead
+for n in spt_n_values:
+    if n < 10:
+        results.append('soft')
+    ...
+\end{lstlisting}
+
+\textbf{Grading:} 1 pt for identifying the bug (dict keys overwrite), 1 pt for stating current output is 3, 1 pt for a valid fix.
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\subsection*{Question 2: NumPy \& Pandas [6 points]}
+
+\noindent\textbf{(a) (3 points)}
+
+\begin{answerbox}
+A \textbf{view} shares memory with the original array --- modifications to the view affect the original. A \textbf{copy} is an independent array with its own memory.
+
+NumPy slicing creates a \textbf{view}. So \lstinline{subset = speeds[1:4]} is a view of \lstinline{speeds[1]}, \lstinline{speeds[2]}, \lstinline{speeds[3]}. Setting \lstinline{subset[0] = 99} modifies \lstinline{speeds[1]}.
+
+\textbf{Answer:} \lstinline{speeds[1]} is \textbf{99}.
+
+\textbf{Grading:} 1 pt for explaining view vs copy, 1 pt for stating slicing creates a view, 1 pt for correct answer (99).
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\noindent\textbf{(b) (3 points)}
+
+\begin{answerbox}
+\begin{lstlisting}[backgroundcolor=\color{white},frame=none]
+df[(df['AVERAGE_SPEED'] < 20) & (df['NUMBER_OF_VEHICLES'] > 100)][['GEOHASH', 'AVERAGE_SPEED']]
+\end{lstlisting}
+
+Also acceptable with \lstinline{.loc}:
+\begin{lstlisting}[backgroundcolor=\color{white},frame=none]
+df.loc[(df['AVERAGE_SPEED'] < 20) & (df['NUMBER_OF_VEHICLES'] > 100), ['GEOHASH', 'AVERAGE_SPEED']]
+\end{lstlisting}
+
+\textbf{Grading:} 1 pt for correct boolean conditions with \lstinline{&}, 1 pt for parentheses around each condition, 1 pt for correct column selection. Deduct 1 pt if using \lstinline{and} instead of \lstinline{&} (won't work on Series).
+\end{answerbox}
+
+\newpage
+\subsection*{Question 3: Visualization [6 points]}
+
+\noindent\textbf{(a) (3 points)}
+
+\begin{answerbox}
+\textbf{Problem 1:} A pie chart with 8 categories makes angular comparison nearly impossible. The 3D perspective further distorts proportions (slices closer to the viewer appear larger). \textbf{Fix:} Use a sorted horizontal bar chart --- position/length encoding is far more accurate than angle.
+
+\textbf{Problem 2:} The jet (rainbow) colormap has no perceptual ordering --- it creates false boundaries and is not colorblind-friendly. \textbf{Fix:} Use a sequential colormap like \texttt{YlOrRd} or \texttt{viridis} where darker/brighter corresponds to higher values.
+
+\textbf{Grading:} 1.5 pts per problem identified + fix. Accept any two valid issues from: too many slices for pie, 3D distortion, rainbow colormap. Accept reasonable alternative fixes.
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\noindent\textbf{(b) (3 points)}
+
+\begin{answerbox}
+\textbf{Anscombe's Quartet} consists of four datasets that have nearly identical summary statistics (same mean, standard deviation, correlation coefficient, and linear regression line) but look completely different when plotted.
+
+\textbf{Lesson:} Summary statistics alone can hide critical patterns in data. One dataset is linear, one is curved, one has a single outlier pulling the regression, and one has a cluster with an outlier. \textbf{Always visualize your data before drawing conclusions or building models.}
+
+\textbf{Grading:} 1 pt for correct definition (4 datasets, same statistics), 1 pt for stating they look different visually, 1 pt for the lesson (must visualize, statistics can mislead).
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\subsection*{Question 4: Statistical Analysis [6 points]}
+
+\noindent\textbf{(a) (3 points)}
+
+\begin{answerbox}
+$$z = \frac{x - \mu}{\sigma} = \frac{26.1 - 32.5}{3.2} = \frac{-6.4}{3.2} = -2.0$$
+
+$|z| = 2.0$. By strict inequality $|z| > 2$, this is exactly at the boundary and \textbf{not} extreme. By $|z| \geq 2$, it \textbf{is} extreme.
+
+\textbf{Grading:} 2 pts for correct z-score calculation, 1 pt for correct classification with justification. Accept either interpretation if justified.
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\noindent\textbf{(b) (3 points)}
+
+\begin{answerbox}
+\textbf{Type I error (false positive):} Rejecting $H_0$ when it is true. Here: concluding the concrete \textbf{does not} meet the 30 MPa specification when it actually does. Result: a good concrete batch is rejected, wasting money and causing delays.
+
+\textbf{Type II error (false negative):} Failing to reject $H_0$ when it is false. Here: concluding the concrete \textbf{meets} the specification when it actually does not. Result: substandard concrete is used in construction.
+
+\textbf{Type II is more dangerous for structural safety} because it leads to using weak concrete in structures, risking collapse and endangering lives. Type I only wastes resources.
+
+\textbf{Grading:} 1 pt for each correct definition with engineering interpretation, 1 pt for identifying Type II as more dangerous with justification.
+\end{answerbox}
+
+\newpage
+\subsection*{Question 5: Machine Learning \& Naive Bayes [6 points]}
+
+\noindent\textbf{(a) (3 points)}
+
+\begin{answerbox}
+For the ``Liquefiable'' class: $TP = 20$, $FP = 15$, $FN = 5$.
+
+$$\text{Precision} = \frac{TP}{TP + FP} = \frac{20}{20 + 15} = \frac{20}{35} \approx 0.571$$
+
+$$\text{Recall} = \frac{TP}{TP + FN} = \frac{20}{20 + 5} = \frac{20}{25} = 0.80$$
+
+\textbf{Prioritize recall.} Missing a liquefiable site (false negative) means building on dangerous ground, risking structural collapse during an earthquake. A false positive only triggers unnecessary ground improvement --- costly but not life-threatening.
+
+\textbf{Grading:} 1 pt for correct precision, 1 pt for correct recall, 1 pt for correct prioritization with engineering justification.
+\end{answerbox}
+
+\vspace{0.3cm}
+
+\noindent\textbf{(b) (3 points)}
+
+\begin{answerbox}
+Using Bayes' theorem:
+
+$$P(\text{Poor} \,|\, \text{8mm}) = \frac{P(\text{8mm} \,|\, \text{Poor}) \cdot P(\text{Poor})}{P(\text{8mm})}$$
+
+First, compute $P(\text{8mm})$ using the Law of Total Probability:
+\begin{align*}
+P(\text{8mm}) &= P(\text{8mm} \,|\, \text{Good}) \cdot P(\text{Good}) + P(\text{8mm} \,|\, \text{Poor}) \cdot P(\text{Poor}) \\
+&= (0.02)(0.70) + (0.15)(0.30) \\
+&= 0.014 + 0.045 = 0.059
+\end{align*}
+
+Then:
+$$P(\text{Poor} \,|\, \text{8mm}) = \frac{(0.15)(0.30)}{0.059} = \frac{0.045}{0.059} \approx \boxed{0.763}$$
+
+Despite the prior belief that only 30\% of beams are in poor condition, observing an 8mm crack raises this to $\approx 76\%$.
+
+\textbf{Grading:} 1 pt for correct $P(\text{8mm})$ via LOTP, 1 pt for correct application of Bayes' formula, 1 pt for correct final answer ($\approx 0.76$).
+\end{answerbox}
+
+\vspace{0.5cm}
+\begin{center}
+\noindent\rule{0.5\linewidth}{0.4pt}\\[0.3cm]
+\textbf{End of Answer Key}
+\end{center}
+
+\end{document}

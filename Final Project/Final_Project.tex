@@ -1,0 +1,610 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in,headheight=14pt]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumitem}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage[hidelinks]{hyperref}
+
+% Bogazici navy palette
+\definecolor{bognavy}{HTML}{0A2A5E}
+\definecolor{codebg}{HTML}{F5F5F5}
+\definecolor{codekw}{HTML}{8B0000}
+\definecolor{codestr}{HTML}{006400}
+\definecolor{codecmt}{HTML}{606060}
+\definecolor{codeln}{HTML}{A0A0A0}
+
+% Section colors
+\titleformat{\section}{\color{bognavy}\Large\bfseries}{\thesection}{0.7em}{}
+\titleformat{\subsection}{\color{bognavy}\large\bfseries}{\thesubsection}{0.6em}{}
+\titleformat{\subsubsection}{\color{bognavy}\normalsize\bfseries}{\thesubsubsection}{0.5em}{}
+
+% Header / footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textcolor{bognavy}{\textbf{CE49X - Final Project}}}
+\fancyhead[R]{\textcolor{bognavy}{Spring 2026}}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\headrule}{\color{bognavy}\hrule width\headwidth height\headrulewidth \vskip-\headrulewidth}
+
+% Code listings
+\lstdefinestyle{shell}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekw},
+  stringstyle=\color{codestr},
+  commentstyle=\color{codecmt}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{codeln},
+  numbersep=8pt,
+  frame=none,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  xleftmargin=12pt,
+  language=bash,
+}
+\lstdefinestyle{python}{
+  backgroundcolor=\color{codebg},
+  basicstyle=\ttfamily\small,
+  keywordstyle=\color{codekw}\bfseries,
+  stringstyle=\color{codestr},
+  commentstyle=\color{codecmt}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{codeln},
+  numbersep=8pt,
+  frame=none,
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  xleftmargin=12pt,
+  language=Python,
+}
+
+% TOC styling
+\renewcommand{\contentsname}{\textcolor{bognavy}{Contents}}
+
+\setlist[itemize]{leftmargin=1.5em,topsep=2pt,itemsep=1pt}
+\setlist[enumerate]{leftmargin=1.7em,topsep=2pt,itemsep=1pt}
+
+\title{}
+\date{}
+
+\begin{document}
+
+% --- Title page (manual layout) ---
+\thispagestyle{empty}
+\begin{center}
+\vspace*{4cm}
+{\Huge\bfseries CE49X\\[0.3cm]
+Introduction to Data Science\\[0.2cm]
+for Civil Engineering\par}
+
+\vspace{2cm}
+{\Large\bfseries Final Project\par}
+\vspace{0.4cm}
+{\large Conflict Situation Monitoring for Maritime Shipping:\\
+Correlating Satellite Thermal Anomalies with War-Related Events\par}
+
+\vspace{2cm}
+{\large\itshape Bo\u{g}azi\c{c}i University\par}
+\vspace{0.3cm}
+{\large Spring 2026\par}
+
+\vspace{1cm}
+{\large Dr. Eyuphan Ko\c{c}\par}
+
+\vfill
+{\large April 17, 2026\par}
+\end{center}
+\newpage
+
+% --- TOC ---
+\tableofcontents
+\newpage
+
+% ============================================================
+\section{Project Overview}
+
+\subsection{Scenario}
+You are the data analytics team at a \textbf{maritime shipping company.} Your company operates cargo vessels across global trade routes, and your operating costs are heavily tied to \textbf{oil and gas prices.} When armed conflicts erupt---especially in energy-producing or strategically important regions---fuel prices spike, shipping routes get disrupted, and insurance premiums surge.
+
+Your management wants an \textbf{early situation monitoring system}: a data pipeline that detects thermal anomalies from satellite imagery in conflict-prone regions around the world and cross-references them with war and conflict news to assess whether these hotspots are associated with armed conflict activity.
+
+\subsection{Core Question}
+\begin{quote}
+\itshape Can satellite-detected thermal anomalies, when correlated with conflict-related news, serve as indicators of armed conflict activity in regions that matter to global shipping and energy markets?
+\end{quote}
+
+\subsection{Project Approach}
+This project follows a situation monitoring pipeline:
+\begin{enumerate}
+  \item \textbf{Data Collection:} Acquiring worldwide satellite thermal data from NASA FIRMS and collecting war and conflict news from web sources.
+  \item \textbf{Spatial-Temporal Analysis:} Clustering thermal detections into discrete hotspot events, analyzing their geographic and temporal patterns across conflict-prone regions.
+  \item \textbf{Correlation \& Classification:} Matching thermal events with conflict news, analyzing whether conflict zones exhibit distinct thermal signatures, and building ML models to classify thermal anomalies.
+\end{enumerate}
+
+\subsection{Learning Objectives}
+By completing this project, students will:
+\begin{itemize}
+  \item Independently research and identify relevant data sources for a real-world monitoring problem.
+  \item Collect and integrate heterogeneous data---structured satellite data (API) and unstructured text data (web scraping).
+  \item Apply geospatial analysis at a global scale: spatial clustering, cross-region comparison, and geographic visualization.
+  \item Perform statistical hypothesis testing to compare groups and interpret significance.
+  \item Build and evaluate machine learning classifiers on a novel prediction problem.
+  \item Create publication-quality multi-panel visualizations for a decision-making audience.
+  \item Think critically about data quality, correlation vs.\ causation, and analysis limitations.
+  \item Connect data science methods to real-world industry applications in logistics, risk assessment, and energy markets.
+\end{itemize}
+
+% ============================================================
+\section{Team Formation}
+\begin{itemize}
+  \item \textbf{Group Size:} 1--2 students per group
+  \item \textbf{Collaboration:} All team members must contribute equally to the project
+  \item \textbf{Deliverables:} Each group submits one final notebook and code repository
+\end{itemize}
+
+% ============================================================
+\section{Background: NASA FIRMS}
+
+NASA's \textbf{Fire Information for Resource Management System (FIRMS)} provides near real-time active fire and thermal anomaly data derived from satellite observations. The system uses thermal anomaly detection algorithms applied to data from two instrument families:
+\begin{itemize}
+  \item \textbf{MODIS} (Moderate Resolution Imaging Spectroradiometer) --- aboard the Terra and Aqua satellites, providing data at $\sim$1\,km resolution since 2000.
+  \item \textbf{VIIRS} (Visible Infrared Imaging Radiometer Suite) --- aboard the Suomi NPP and NOAA-20 satellites, providing data at $\sim$375\,m resolution since 2012.
+\end{itemize}
+
+Each detection record includes geographic coordinates, acquisition date and time, confidence level, brightness temperature, and \textbf{Fire Radiative Power (FRP)}---a measure of the thermal energy output in megawatts. Importantly, FIRMS detects \emph{any} thermal anomaly, not just wildfires---this includes industrial fires, oil facility burns, explosions, and other high-temperature events.
+
+\subsection{Accessing the Data}
+\begin{enumerate}
+  \item Register for a free MAP\_KEY at: \url{https://firms.modaps.eosdis.nasa.gov/api/area/}
+  \item Use the \textbf{area endpoint} (bounding box) or the \textbf{country endpoint} (ISO3 country codes) to download data.
+  \item The API returns up to \textbf{5 days per request.} For historical data, append a date parameter (\texttt{YYYY-MM-DD}). To collect longer periods, loop through 5-day chunks.
+  \item Use \texttt{\_SP} (Standard Processing) sources for historical data and \texttt{\_NRT} for near real-time.
+\end{enumerate}
+
+Full API documentation: \url{https://firms.modaps.eosdis.nasa.gov/api/area/}
+
+\subsection{FIRMS Data Fields}
+
+% ============================================================
+\section{Task 1: Data Collection \& Assembly}
+\noindent\textbf{Points: 30/100}
+
+\subsection{Objective}
+Build a multi-source dataset for conflict situation monitoring: satellite thermal anomaly data from NASA FIRMS and war/conflict-related news articles.
+
+\begin{table}[h]
+\centering
+\begin{tabular}{lll}
+\toprule
+\textbf{Field} & \textbf{Description} & \textbf{Example} \\
+\midrule
+\texttt{latitude} & Latitude of detection pixel center & 33.312 \\
+\texttt{longitude} & Longitude of detection pixel center & 44.361 \\
+\texttt{brightness} & Brightness temperature (Kelvin) & 328.5 \\
+\texttt{acq\_date} & Acquisition date & 2024-08-15 \\
+\texttt{acq\_time} & Acquisition time (HHMM UTC) & 1342 \\
+\texttt{satellite} & Satellite name & Suomi NPP \\
+\texttt{confidence} & Detection confidence & nominal / high \\
+\texttt{frp} & Fire Radiative Power (MW) & 12.4 \\
+\texttt{daynight} & Day or night observation & D / N \\
+\bottomrule
+\end{tabular}
+\caption{Key fields in FIRMS active fire / thermal anomaly data.}
+\end{table}
+
+\subsection{NASA FIRMS Thermal Data}
+\begin{itemize}
+  \item Register for a free FIRMS MAP\_KEY.
+  \item Select your regions of interest that are relevant to conflict monitoring and global shipping. Justify your selection.
+  \item Collect VIIRS and/or MODIS data for your selected regions covering a continuous period of \textbf{at least 6 months.}
+  \item Minimum \textbf{5,000 thermal detection points} across all regions combined.
+  \item Load into a Pandas DataFrame. Show \texttt{df.head()}, \texttt{df.describe()}, and check for missing values.
+  \item Clean the data:
+  \begin{itemize}
+    \item Parse \texttt{acq\_date} to a proper datetime type.
+    \item Filter out low-confidence detections (document the threshold you choose and justify it).
+    \item Add a column identifying which region each detection belongs to.
+    \item Handle any missing or anomalous values.
+  \end{itemize}
+  \item Document: API endpoint(s) used, bounding boxes or country codes, date range, satellite instrument(s), and total records before and after cleaning.
+\end{itemize}
+
+\subsection{War \& Conflict News Collection}
+\begin{itemize}
+  \item Collect at least \textbf{1,000 war/conflict-related news articles} covering your selected regions during the same time period as your FIRMS data.
+  \item Use \textbf{at least 2 different sources.} Some options:
+  \begin{itemize}
+    \item \textbf{News APIs:} NewsAPI, GNews, MediaStack, TheNewsAPI
+    \item \textbf{Aggregators:} Google News (RSS feeds or scraping), Bing News
+    \item \textbf{International Outlets:} BBC, Reuters, Al Jazeera, Associated Press, CNN, The Guardian
+    \item \textbf{Conflict-Focused Sources:} The War Zone, Defense News, Liveuamap, Conflict News
+    \item \textbf{Wire Services:} AFP, DPA, Anadolu Agency
+  \end{itemize}
+  \item Search queries should include conflict-related keywords such as: ``war'', ``conflict'', ``military'', ``bombing'', ``airstrike'', ``shelling'', ``missile'', ``attack'', ``troops'', ``armed'', ``explosion'', ``combat''.
+  \item For each article, extract:
+  \begin{itemize}
+    \item Title
+    \item Publication date
+    \item Source / Publisher
+    \item URL
+    \item Location mention(s) (country, city, or region name from the headline or snippet)
+  \end{itemize}
+  \item Store in a structured Pandas DataFrame with consistent column names.
+\end{itemize}
+
+\subsection{Deliverables for Task 1}
+\begin{itemize}
+  \item Data collection scripts (API calls, scraping code).
+  \item Clean DataFrames loaded and explored (\texttt{head()}, \texttt{describe()}, \texttt{info()}).
+  \item Markdown cells documenting each source: URL, access date, method, and record count.
+  \item A written justification of your region selection (why these regions matter for shipping and energy).
+\end{itemize}
+
+% ============================================================
+\section{Task 2: Spatial \& Temporal Analysis}
+\noindent\textbf{Points: 25/100}
+
+\subsection{Objective}
+Transform raw satellite detection points into meaningful \textbf{thermal events}, then analyze their geographic distribution, temporal patterns, and regional characteristics.
+
+\subsection{Thermal Event Clustering}
+Raw FIRMS data contains individual satellite observation pixels. Multiple detections that are close in space and time typically represent a single thermal event. Your task is to cluster these into discrete \textbf{thermal events}.
+\begin{itemize}
+  \item \textbf{Grouping approach:} Cluster detections that fall within a spatial radius (suggested: 5--10\,km) and temporal window (suggested: 1--3 days) into one thermal event.
+  \begin{itemize}
+    \item \emph{Simple approach:} Group by region/country and date, then merge overlapping date windows.
+    \item \emph{Advanced approach:} Use DBSCAN from scikit-learn with a Haversine distance metric on (lat, lon, time) features.
+  \end{itemize}
+  \item For each thermal event, compute:
+  \begin{itemize}
+    \item Centroid coordinates (mean latitude, mean longitude)
+    \item Start date and end date
+    \item Duration (number of days active)
+    \item Total FRP (sum of all detections)
+    \item Maximum brightness temperature
+    \item Number of satellite detection points
+    \item Region label
+  \end{itemize}
+  \item Report the total number of discrete thermal events identified per region and describe your clustering methodology.
+\end{itemize}
+
+\subsection{Temporal Patterns}
+\begin{itemize}
+  \item Create a \textbf{monthly time series} of thermal event frequency, \textbf{broken down by region}. Are there temporal spikes that could correspond to conflict escalation?
+  \item Analyze \textbf{day vs.\ night} detection patterns using the \texttt{daynight} column. Do conflict-prone regions show different day/night ratios than others?
+  \item Compare thermal intensity (mean FRP) across regions and over time.
+  \item Produce at least \textbf{2 temporal visualizations} (e.g., monthly event count by region, FRP trend over time).
+\end{itemize}
+
+\subsection{Spatial Analysis}
+\begin{itemize}
+  \item Create a \textbf{world map} (or multi-region map) showing all thermal events:
+  \begin{itemize}
+    \item Marker size proportional to total FRP.
+    \item Color mapped to region or duration.
+    \item Use a proper sequential colormap (\textbf{not} rainbow or jet).
+  \end{itemize}
+  \item Identify and label the \textbf{top hotspot clusters} within each region by number of events or total FRP.
+  \item Produce at least \textbf{2 spatial visualizations}.
+\end{itemize}
+
+\subsection{Deliverables for Task 2}
+\begin{itemize}
+  \item Thermal event clustering code with documented methodology and parameter choices.
+  \item Summary DataFrame of thermal events with all computed features.
+  \item At least 4 publication-quality visualizations (2 temporal, 2 spatial) with axis labels, titles, legends, and colorbars where applicable.
+\end{itemize}
+
+% ============================================================
+\section{Task 3: Thermal--News Correlation \& Classification}
+\noindent\textbf{Points: 30/100}
+
+\subsection{Objective}
+Match thermal events with conflict news, analyze whether conflict-active regions show distinct thermal signatures, and build machine learning models to classify thermal anomalies.
+
+\subsection{Thermal--News Matching}
+Develop a strategy to link conflict news articles to thermal events:
+\begin{itemize}
+  \item \textbf{Temporal matching:} The article was published within a reasonable window of the thermal event (e.g., 0--7 days).
+  \item \textbf{Spatial/location matching:} Location mentions in the article (country, city, region) correspond to the thermal event's geographic area.
+  \item \textbf{Keyword relevance:} The article contains conflict-related keywords confirming it is about armed conflict activity.
+  \item For each thermal event, determine:
+  \begin{itemize}
+    \item \textbf{Conflict-associated:} At least one matching conflict news article found.
+    \item \textbf{No conflict association:} No matching articles (likely a natural fire, industrial activity, or agricultural burn).
+  \end{itemize}
+  \item Report the \textbf{conflict-association rate} per region: what fraction of thermal events in each region have matching conflict news?
+\end{itemize}
+
+\subsection{Regional News Reporting Comparison}
+Different conflict zones receive very different levels of media attention. Analyze how news reporting varies across your selected regions:
+\begin{itemize}
+  \item For each region, compute: total number of articles, number of unique sources covering it, average articles per thermal event, and the time difference between satellite detection and the earliest news article.
+  \item Compare regions: which conflict zones are heavily covered and which are underreported?
+  \item Perform a \textbf{statistical hypothesis test} comparing a metric of your choice (e.g., FRP, reporting delay, article count) between regions or between conflict-associated and non-conflict thermal events. State hypotheses, report the test statistic and p-value, and interpret the result.
+  \item Create at least \textbf{2 visualizations} comparing coverage across regions (e.g., stacked bar chart of article count by region and source, heatmap of keyword frequency by region).
+  \item Discuss: which regions are ``blind spots'' where satellite data is especially valuable because news coverage is sparse?
+\end{itemize}
+
+\subsection{Predicting Conflict Association (ML Classification)}
+Build a classifier to predict whether a thermal event is conflict-associated:
+\begin{itemize}
+  \item \textbf{Features:} Total FRP, duration (days), max brightness, number of detection points, day/night ratio, latitude, longitude, region, month or season.
+  \item \textbf{Target:} Conflict-associated (1) vs.\ Non-conflict (0).
+  \item \textbf{Pipeline:}
+  \begin{itemize}
+    \item Train/test split (80/20, stratified by target).
+    \item Feature scaling with \texttt{StandardScaler} (fit on training set only).
+    \item Train at least \textbf{2 classifiers} from: Logistic Regression, Decision Tree, Naive Bayes, SVM.
+  \end{itemize}
+  \item \textbf{Evaluation:}
+  \begin{itemize}
+    \item Report accuracy, precision, recall, and F1-score for each model.
+    \item Display the confusion matrix as a heatmap.
+    \item Discuss: in the context of a shipping company's risk monitoring, is it worse to miss a real conflict (false negative) or to raise a false alarm (false positive)? How does this affect your choice of evaluation metric?
+  \end{itemize}
+  \item Identify the \textbf{most predictive features} (e.g., via logistic regression coefficients or decision tree feature importances). What does this reveal about the characteristics of conflict-related thermal anomalies?
+\end{itemize}
+
+\subsection{Deliverables for Task 3}
+\begin{itemize}
+  \item Matching algorithm code with clearly documented logic and parameter choices.
+  \item Conflict-association rates per region.
+  \item Regional news comparison with hypothesis test, coverage statistics, and blind spot discussion.
+  \item ML classification pipeline with evaluation metrics and confusion matrices.
+  \item At least 5 visualizations across all sub-tasks.
+\end{itemize}
+
+% ============================================================
+\section{Task 4: Dashboard, Insights \& Reflection}
+\noindent\textbf{Points: 15/100}
+
+\subsection{Objective}
+Synthesize all findings into a multi-panel dashboard and a written discussion connecting the results to real-world decision-making in maritime shipping and energy risk management.
+
+\subsection{Multi-Panel Summary Dashboard}
+Create a single multi-panel figure using \texttt{matplotlib.gridspec.GridSpec}:
+\begin{itemize}
+  \item At least \textbf{4 panels} with at least \textbf{3 different chart types}.
+  \item Must include:
+  \begin{enumerate}
+    \item A world/multi-region map showing thermal events color-coded by conflict association.
+    \item A conflict-association rate comparison across regions.
+    \item A temporal trend or reporting pattern visualization.
+    \item One panel of your choice highlighting a key finding.
+  \end{enumerate}
+  \item At least one panel should span multiple grid cells.
+  \item Include an overall \texttt{fig.suptitle()} that communicates the main finding as a headline.
+  \item Save the figure as \texttt{dashboard.png} at 300 DPI using \texttt{plt.savefig()}.
+\end{itemize}
+
+\subsection{Written Discussion \& Industry Implications}
+Answer all of the following in separate markdown cells (minimum 1 paragraph each):
+\begin{enumerate}
+  \item \textbf{Key Findings:} What did you discover about the relationship between satellite thermal anomalies and conflict activity? Which regions showed the strongest signal? What surprised you?
+  \item \textbf{Shipping \& Energy Implications:} Based on your analysis, which regions pose the highest risk for shipping route disruptions and energy price volatility? If you were presenting to your company's management, what actionable recommendations would you make for route planning and risk hedging?
+  \item \textbf{Limitations \& Future Work:} What are the main limitations of your analysis? Consider: matching accuracy, the inability to distinguish conflict fires from natural fires purely by satellite data, temporal coverage, news bias toward certain regions, and confounding factors. What additional data or methods would improve the system?
+  \item \textbf{Methodology Reflection:} Which part of the data science pipeline was most challenging? What would you do differently if you started over?
+\end{enumerate}
+
+\subsection{Deliverables for Task 4}
+\begin{itemize}
+  \item Multi-panel dashboard figure saved as \texttt{dashboard.png}.
+  \item Written discussion (4 sections, minimum 1 paragraph each).
+\end{itemize}
+
+% ============================================================
+\section{Technical Requirements}
+
+\subsection{Programming Languages and Tools}
+\begin{itemize}
+  \item \textbf{Primary Language:} Python 3.8+
+  \item \textbf{Required Libraries:}
+  \begin{itemize}
+    \item Data Collection: \texttt{requests}, \texttt{BeautifulSoup} (\texttt{bs4}), optionally \texttt{selenium}.
+    \item Data Manipulation: \texttt{pandas}, \texttt{numpy}.
+    \item Visualization: \texttt{matplotlib}, \texttt{seaborn}.
+    \item Statistics: \texttt{scipy.stats}.
+    \item Machine Learning: \texttt{scikit-learn} (\texttt{train\_test\_split}, \texttt{StandardScaler}, \texttt{LogisticRegression}, \texttt{DecisionTreeClassifier}, \texttt{GaussianNB}, \texttt{SVC}, \texttt{confusion\_matrix}, \texttt{classification\_report}, \texttt{cross\_val\_score}).
+    \item Database: \texttt{sqlalchemy}, \texttt{psycopg2-binary}.
+  \end{itemize}
+  \item \textbf{Optional Libraries (not required):}
+  \begin{itemize}
+    \item \texttt{folium} --- interactive map visualizations.
+    \item \texttt{geopy} --- geocoding location names to coordinates.
+    \item \texttt{geopandas} --- geographic data with shapefiles.
+  \end{itemize}
+  \item \textbf{Environment:} Jupyter Notebooks are required for this project.
+\end{itemize}
+
+% ============================================================
+\section{Database Storage with PostgreSQL \& Docker}
+
+All collected and processed data must be stored in a \textbf{PostgreSQL} database running inside a \textbf{Docker} container. This mirrors real-world data engineering workflows where data pipelines persist results to a database rather than flat files.
+
+\subsection{Setting Up PostgreSQL with Docker}
+\begin{enumerate}
+  \item \textbf{Install Docker Desktop} from \url{https://www.docker.com/products/docker-desktop/} (available for macOS, Windows, and Linux). After installation, verify it is running:
+\begin{lstlisting}[style=shell]
+docker --version
+\end{lstlisting}
+
+  \item \textbf{Pull and run the PostgreSQL image.} Open a terminal and run:
+\begin{lstlisting}[style=shell]
+docker run --name ce49x-postgres \
+  -e POSTGRES_USER=ce49x \
+  -e POSTGRES_HOST_AUTH_METHOD=trust \
+  -e POSTGRES_DB=conflict_monitoring \
+  -p 5432:5432 \
+  -d postgres:16
+\end{lstlisting}
+
+  This creates a container named \texttt{ce49x-postgres} with:
+  \begin{itemize}
+    \item Database name: \texttt{conflict\_monitoring}
+    \item Username: \texttt{ce49x}
+    \item No password required (local development only)
+    \item Accessible on \texttt{localhost:5432}
+  \end{itemize}
+
+  \item \textbf{Verify the container is running:}
+\begin{lstlisting}[style=shell]
+docker ps
+\end{lstlisting}
+
+  \item \textbf{To stop and restart} the container later:
+\begin{lstlisting}[style=shell]
+docker stop ce49x-postgres
+docker start ce49x-postgres
+\end{lstlisting}
+\end{enumerate}
+
+\subsection{Connecting from Python}
+Use \texttt{sqlalchemy} to connect to the database and write DataFrames directly:
+\begin{lstlisting}[style=python]
+from sqlalchemy import create_engine
+import pandas as pd
+
+# Create connection engine
+engine = create_engine(
+    "postgresql://ce49x@localhost:5432/conflict_monitoring"
+)
+
+# Write a DataFrame to a table
+df_firms.to_sql("firms_detections", engine, if_exists="replace", index=False)
+df_news.to_sql("news_articles", engine, if_exists="replace", index=False)
+
+# Read back from the database
+df = pd.read_sql("SELECT * FROM firms_detections LIMIT 10", engine)
+print(df)
+\end{lstlisting}
+
+\subsection{Required Tables}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{ll}
+\toprule
+\textbf{Table Name} & \textbf{Contents} \\
+\midrule
+\texttt{firms\_detections} & Raw FIRMS thermal detection records (cleaned) \\
+\texttt{news\_articles} & Collected conflict news articles with metadata \\
+\texttt{thermal\_events} & Clustered thermal events with computed features \\
+\texttt{event\_matches} & Thermal event--news article matching results \\
+\bottomrule
+\end{tabular}
+\caption{Required database tables.}
+\end{table}
+
+You must create at least the following tables in your database:
+
+As you progress through the tasks, insert your processed DataFrames into the corresponding tables using \texttt{to\_sql()}. When performing analysis in later tasks, \textbf{read the data back from the database} using \texttt{pd.read\_sql()} rather than from local variables or CSV files. This demonstrates the full pipeline: collect $\rightarrow$ store $\rightarrow$ query $\rightarrow$ analyze.
+
+\subsection{Verification}
+You can verify your tables directly from the terminal:
+\begin{lstlisting}[style=shell]
+docker exec -it ce49x-postgres psql -U ce49x -d conflict_monitoring -c "\dt"
+\end{lstlisting}
+
+This lists all tables in the database. You can also run SQL queries:
+\begin{lstlisting}[style=shell]
+docker exec -it ce49x-postgres psql -U ce49x -d conflict_monitoring \
+  -c "SELECT COUNT(*) FROM firms_detections;"
+\end{lstlisting}
+
+% ============================================================
+\section{Final Deliverables}
+
+\subsection{Code Repository}
+\begin{itemize}
+  \item Well-organized GitHub repository (pushed to your course fork).
+  \item \texttt{requirements.txt} or \texttt{environment.yml} file.
+  \item \texttt{README.md} explaining project structure, how to set up the database with Docker, and how to reproduce the analysis.
+  \item The \texttt{docker run} command (or a \texttt{docker-compose.yml} file) needed to recreate the database.
+\end{itemize}
+
+\subsection{Project Notebook}
+\begin{itemize}
+  \item A single Jupyter Notebook containing all code, analysis, and written discussion.
+  \item The notebook must \textbf{run top-to-bottom without errors} (Kernel $\rightarrow$ Restart \& Run All).
+  \item All visualizations must be publication-quality: axis labels with units, descriptive titles, legends, and appropriate colormaps.
+  \item All data sources must be cited with URLs and access dates.
+\end{itemize}
+
+\subsection{Dashboard Figure}
+\begin{itemize}
+  \item \texttt{dashboard.png} saved at 300 DPI alongside the notebook.
+\end{itemize}
+
+\subsection{Final Presentation Video}
+\noindent\textbf{Length:} 10--15 minutes
+
+\smallskip
+Instead of a live demo day, each group submits a \textbf{recorded presentation video}:
+\begin{itemize}
+  \item 5--7 minutes: main findings and methodology
+  \item 3--5 minutes: walkthrough of the dashboard and notebook (Q\&A-style discussion)
+  \item 1--2 minutes: conclusions and future outlook
+\end{itemize}
+
+\noindent\textbf{Format:} screen recording with audio (slides and/or notebook walkthrough; show your \texttt{dashboard.png}).
+
+\smallskip
+\noindent\textbf{Delivery:} email the video file (or a shareable link --- Google Drive, YouTube unlisted, WeTransfer) to \textbf{both} of the following addresses:
+\begin{itemize}
+  \item Dr. Eyuphan Ko\c{c} --- \href{mailto:eyuphan.koc@bogazici.edu.tr}{\texttt{eyuphan.koc@bogazici.edu.tr}}
+  \item Mustafa \"Oz\c{c}etin (TA) --- \href{mailto:mustafa.ozcetin@std.bogazici.edu.tr}{\texttt{mustafa.ozcetin@std.bogazici.edu.tr}}
+\end{itemize}
+
+\noindent\textbf{Subject line:} \texttt{CE49X Final Project Video --- <Group Member Names>}
+
+\smallskip
+\noindent\textbf{Deadline:} same as the repository submission deadline.
+
+% ============================================================
+\section{Grading Summary}
+
+\begin{table}[h]
+\centering
+\begin{tabular}{llr}
+\toprule
+\textbf{Task} & \textbf{Description} & \textbf{Points} \\
+\midrule
+Task 1 & Data Collection \& Assembly                & 30 \\
+       & \quad NASA FIRMS Thermal Data              & 15 \\
+       & \quad War \& Conflict News Collection      & 15 \\
+\midrule
+Task 2 & Spatial \& Temporal Analysis               & 25 \\
+       & \quad Thermal Event Clustering             & 10 \\
+       & \quad Temporal Patterns                    &  7 \\
+       & \quad Spatial Analysis                     &  8 \\
+\midrule
+Task 3 & Thermal--News Correlation \& Classification & 30 \\
+       & \quad Matching Algorithm                   & 10 \\
+       & \quad Regional News Reporting Comparison   & 15 \\
+       & \quad ML Classification                    &  5 \\
+\midrule
+Task 4 & Dashboard, Insights \& Reflection          & 15 \\
+       & \quad Multi-Panel Dashboard                &  8 \\
+       & \quad Written Discussion                   &  7 \\
+\midrule
+\textbf{Total} &                                    & \textbf{100} \\
+\bottomrule
+\end{tabular}
+\caption{Point allocation by task and sub-task.}
+\end{table}
+
+\end{document}

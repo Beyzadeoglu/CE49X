@@ -1,0 +1,361 @@
+%% CE 49X - Introduction to Computational Thinking and Data Science
+%% Midterm Exam - Part 1 (Paper-Based)
+%% Weeks 1--7
+%% Instructor: Dr. Eyuphan Koc
+%% Bogazici University - Spring 2026
+
+\documentclass[11pt,a4paper]{article}
+
+%% ==================== PACKAGES ====================
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{graphicx}
+\usepackage[margin=0.7in,headheight=14pt]{geometry}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{enumerate}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{courier}
+
+%% Define custom colors
+\definecolor{bunavy}{RGB}{0,20,60}
+\definecolor{softblue}{RGB}{100,140,180}
+\definecolor{codebg}{RGB}{245,245,245}
+
+%% Listings style for Python
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.5pt,
+  rulecolor=\color{gray!50},
+  keywordstyle=\color{blue!70!black},
+  stringstyle=\color{red!60!black},
+  commentstyle=\color{green!50!black},
+  showstringspaces=false,
+  breaklines=true,
+  numbers=none,
+  xleftmargin=4pt,
+  xrightmargin=4pt,
+  aboveskip=8pt,
+  belowskip=8pt
+}
+
+%% Set up header and footer
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CE 49X - Spring 2026}
+\chead{Midterm Exam -- Part 1}
+\rhead{Dr. E. Koc}
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+
+%% ==================== DOCUMENT BEGINS ====================
+\begin{document}
+
+%% Title and Instructions
+\begin{center}
+\Large\textbf{CE 49X: Introduction to Computational Thinking and Data Science}\\[0.1cm]
+\large\textbf{Midterm Exam -- Part 1 (Paper-Based)}\\[0.05cm]
+\normalsize Weeks 1--7 Material\\[0.2cm]
+\end{center}
+
+\noindent
+\begin{tabular}{ll}
+\textbf{Name:} \rule{8cm}{0.4pt} & \textbf{Student ID:} \rule{4cm}{0.4pt}\\[0.2cm]
+\textbf{Date:} April 8, 2026 & \textbf{Duration:} 60 minutes
+\end{tabular}
+
+\vspace{0.2cm}
+\noindent\rule{\linewidth}{1pt}
+
+\noindent\textbf{Instructions:}
+\begin{itemize}
+\setlength\itemsep{0em}
+\item This is Part 1 of the midterm exam (paper-based).
+\item Answer all questions. Show your work for full credit on written questions.
+\item One page (both sides) of handwritten notes is allowed.
+\item No calculators or electronic devices.
+\item A helpful formulas page is provided at the end.
+\item Total points: \textbf{50}
+\end{itemize}
+
+\noindent\rule{\linewidth}{1pt}
+\vspace{0.2cm}
+
+%% ==================== SECTION A: MULTIPLE CHOICE ====================
+\section*{Section A: Multiple Choice \hfill [20 points]}
+
+\noindent \textit{Circle the single best answer for each question. Each question is worth 2 points.}
+
+\vspace{0.3cm}
+
+\noindent\textbf{1.} What does the following expression evaluate to?
+\begin{lstlisting}
+len([x for x in range(10) if x % 3 == 0])
+\end{lstlisting}
+\begin{enumerate}[(a)]
+\item 3
+\item 4
+\item 10
+\item 0
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{2.} Which import statement allows you to call \lstinline{np.array([1, 2, 3])}?
+\begin{enumerate}[(a)]
+\item \lstinline{import numpy}
+\item \lstinline{from numpy import array}
+\item \lstinline{import numpy as np}
+\item \lstinline{import np from numpy}
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{3.} Given \lstinline{a = np.array([1, 2, 3, 4, 5])}, what does \lstinline{a[1:4]} return?
+\begin{enumerate}[(a)]
+\item \lstinline{array([1, 2, 3, 4])}
+\item \lstinline{array([2, 3, 4])}
+\item \lstinline{array([2, 3, 4, 5])}
+\item \lstinline{array([1, 2, 3])}
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{4.} Which pandas method fills missing values with the \textbf{previous} row's value?
+\begin{enumerate}[(a)]
+\item \lstinline{df.dropna()}
+\item \lstinline{df.fillna(method='ffill')}
+\item \lstinline{df.interpolate()}
+\item \lstinline{df.fillna(0)}
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{5.} Which visual encoding channel is \textbf{most accurate} for comparing quantitative values?
+\begin{enumerate}[(a)]
+\item Color intensity
+\item Angle
+\item Area
+\item Position
+\end{enumerate}
+
+\newpage
+
+\noindent\textbf{6.} According to Tufte's principles, what should a well-designed chart maximize?
+\begin{enumerate}[(a)]
+\item Number of colors used
+\item Data-ink ratio
+\item Chart area
+\item Number of gridlines
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{7.} A dataset has mean $\mu = 50$ and standard deviation $\sigma = 8$. What is the z-score of a value of 66?
+\begin{enumerate}[(a)]
+\item 1.5
+\item 2.0
+\item 2.5
+\item 8.0
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{8.} A hypothesis test yields a p-value of 0.03 at significance level $\alpha = 0.05$. What is the correct conclusion?
+\begin{enumerate}[(a)]
+\item There is a 3\% chance that $H_0$ is true
+\item Reject $H_0$
+\item Fail to reject $H_0$
+\item The effect size is 0.03
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{9.} A model predicts ``safe'' for every sample in a dataset where 95\% of samples are actually safe. Its accuracy is 95\%. Why is this misleading?
+\begin{enumerate}[(a)]
+\item The model is overfitting
+\item It never identifies the dangerous 5\%
+\item The training set is too small
+\item Accuracy requires cross-validation
+\end{enumerate}
+
+\vspace{0.3cm}
+
+\noindent\textbf{10.} In Naive Bayes, what does the ``naive'' assumption mean?
+\begin{enumerate}[(a)]
+\item The model uses no prior information
+\item Features are conditionally independent given the class
+\item The model always predicts the most common class
+\item Training data must be normally distributed
+\end{enumerate}
+
+\newpage
+%% ==================== SECTION B: WRITTEN QUESTIONS ====================
+\section*{Section B: Written Questions \hfill [30 points]}
+
+%% ==================== QUESTION 1 ====================
+\subsection*{Question 1: Code Tracing \& Debugging \hfill [6 points]}
+
+\noindent\textbf{(a) (3 points)} What is the \textbf{exact} output of the following code?
+
+\begin{lstlisting}
+beams = [3.5, 7.2, 4.8, 12.1, 6.3]
+long_beams = [b for b in beams if b > 5.0]
+total = sum(long_beams)
+count = len(long_beams)
+print(f"Found {count} beams totaling {total:.1f} m")
+print(f"Average: {total/count:.2f} m")
+\end{lstlisting}
+
+\vspace{4.5cm}
+
+\noindent\textbf{(b) (3 points)} The following function has a bug. Identify the error, explain what the code currently prints, and write the corrected line(s).
+
+\begin{lstlisting}
+def classify_soil(spt_n_values):
+    """Classify as 'soft' (N<10), 'medium' (10<=N<30), 'hard' (N>=30)"""
+    results = {}
+    for n in spt_n_values:
+        if n < 10:
+            results[n] = 'soft'
+        elif n < 30:
+            results[n] = 'medium'
+        else:
+            results[n] = 'hard'
+    return results
+
+data = [5, 25, 5, 40, 25]
+print(len(classify_soil(data)))
+\end{lstlisting}
+
+\vspace{5cm}
+
+%% ==================== QUESTION 2 ====================
+\subsection*{Question 2: NumPy \& Pandas \hfill [6 points]}
+
+\noindent\textbf{(a) (3 points)} Explain the difference between a NumPy \textbf{view} and a \textbf{copy}. Given the code below, what is the value of \lstinline{speeds[1]} after execution? Explain why.
+
+\begin{lstlisting}
+import numpy as np
+speeds = np.array([40, 55, 30, 65, 20])
+subset = speeds[1:4]
+subset[0] = 99
+\end{lstlisting}
+
+\vspace{4.5cm}
+
+\noindent\textbf{(b) (3 points)} Write a \textbf{single} pandas expression that filters a DataFrame \lstinline{df} to rows where \lstinline{AVERAGE_SPEED < 20} AND \lstinline{NUMBER_OF_VEHICLES > 100}, and returns only the \lstinline{GEOHASH} and \lstinline{AVERAGE_SPEED} columns.
+
+\vspace{4.5cm}
+
+\newpage
+%% ==================== QUESTION 3 ====================
+\subsection*{Question 3: Visualization \hfill [6 points]}
+
+\noindent\textbf{(a) (3 points)} A colleague prepares a chart for a municipal earthquake damage report. The chart is a \textbf{3D pie chart} using the \textbf{jet (rainbow) colormap} to show the percentage of damaged buildings across 8 districts. Identify \textbf{two} specific problems with this chart and suggest a fix for each.
+
+\vspace{5.5cm}
+
+\noindent\textbf{(b) (3 points)} What is \textbf{Anscombe's Quartet}? In 2--3 sentences, explain what it demonstrates and the lesson it teaches for data analysis.
+
+\vspace{5cm}
+
+%% ==================== QUESTION 4 ====================
+\subsection*{Question 4: Statistical Analysis \hfill [6 points]}
+
+\noindent\textbf{(a) (3 points)} A batch of 28-day concrete cylinder tests gives a mean compressive strength of $\mu = 32.5$ MPa with a standard deviation of $\sigma = 3.2$ MPa. Compute the z-score for a cylinder that tested at 26.1 MPa. Is this result ``extreme'' by the $|z| > 2$ convention?
+
+\vspace{4.5cm}
+
+\noindent\textbf{(b) (3 points)} Define \textbf{Type I error} and \textbf{Type II error}. For a concrete strength test where $H_0$: ``the concrete meets the 30 MPa specification,'' describe what each error type means in practical engineering terms. Which is more dangerous for structural safety?
+
+\vspace{5.5cm}
+
+\newpage
+%% ==================== QUESTION 5 ====================
+\subsection*{Question 5: Machine Learning \& Naive Bayes \hfill [6 points]}
+
+\noindent\textbf{(a) (3 points)} A soil liquefaction classifier is evaluated on 200 test sites. The confusion matrix is:
+
+\begin{center}
+\begin{tabular}{l|cc}
+ & \textbf{Predicted Stable} & \textbf{Predicted Liquefiable} \\
+\hline
+\textbf{Actually Stable} & 160 & 15 \\
+\textbf{Actually Liquefiable} & 5 & 20 \\
+\end{tabular}
+\end{center}
+
+Compute the \textbf{precision} and \textbf{recall} for the ``Liquefiable'' class. Should the engineer prioritize precision or recall in this application? Justify in 1--2 sentences.
+
+\vspace{5.5cm}
+
+\noindent\textbf{(b) (3 points)} A bridge inspector uses Bayes' theorem to assess beam condition. Given:
+\begin{itemize}
+\setlength\itemsep{0em}
+\item Prior: $P(\text{Good}) = 0.70$, $P(\text{Poor}) = 0.30$
+\item Likelihood of observing an 8mm crack: $P(\text{8mm} \,|\, \text{Good}) = 0.02$, $P(\text{8mm} \,|\, \text{Poor}) = 0.15$
+\end{itemize}
+
+\noindent Compute $P(\text{Poor} \,|\, \text{8mm crack})$. Show your work.
+
+\vspace{6cm}
+
+\newpage
+%% ==================== HELPFUL FORMULAS ====================
+\section*{Helpful Formulas}
+
+\small
+
+\textbf{Statistics:}
+\begin{align*}
+&\text{Z-score: } z = \frac{x - \mu}{\sigma} \\[0.3cm]
+&\text{68-95-99.7 Rule: } P(\mu \pm 1\sigma) \approx 68\%, \quad P(\mu \pm 2\sigma) \approx 95\%, \quad P(\mu \pm 3\sigma) \approx 99.7\%
+\end{align*}
+
+\textbf{Classification Metrics:}
+\begin{align*}
+&\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \\[0.2cm]
+&\text{Precision} = \frac{TP}{TP + FP} \qquad \text{Recall} = \frac{TP}{TP + FN} \\[0.2cm]
+&F_1 = \frac{2 \cdot \text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{align*}
+
+\textbf{Confusion Matrix Layout:}
+\begin{center}
+\begin{tabular}{l|cc}
+ & \textbf{Predicted Negative} & \textbf{Predicted Positive} \\
+\hline
+\textbf{Actually Negative} & TN & FP \\
+\textbf{Actually Positive} & FN & TP \\
+\end{tabular}
+\end{center}
+
+\textbf{Bayes' Theorem:}
+$$P(A \,|\, B) = \frac{P(B \,|\, A) \cdot P(A)}{P(B)}$$
+$$\text{where } P(B) = \sum_i P(B \,|\, A_i) \cdot P(A_i)$$
+
+\textbf{Naive Bayes:}
+$$P(L \,|\, f_1, \ldots, f_n) \propto P(L) \prod_{i=1}^{n} P(f_i \,|\, L)$$
+
+\textbf{Gaussian PDF:}
+$$P(f_i \,|\, L) = \frac{1}{\sqrt{2\pi\sigma_L^2}} \exp\!\left(-\frac{(f_i - \mu_L)^2}{2\sigma_L^2}\right)$$
+
+\vspace{0.5cm}
+\textbf{Visual Encoding Accuracy Hierarchy:}\\
+Position $>$ Length $>$ Angle $>$ Area $>$ Color Intensity
+
+\vspace{0.5cm}
+\begin{center}
+\noindent\rule{0.5\linewidth}{0.4pt}\\[0.3cm]
+\textbf{End of Part 1}\\[0.2cm]
+\textit{Please review your answers if time permits.}
+\end{center}
+
+\end{document}

@@ -1,0 +1,11 @@
+# Raw DrivenData files — not redistributable, keep them local
+data/raw/*.csv
+
+# Executed notebooks (kept out of source control to avoid noisy diffs)
+*_executed.ipynb
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+
+# macOS
+.DS_Store
