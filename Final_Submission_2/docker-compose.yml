@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: ce49x-postgres
+    environment:
+      POSTGRES_USER: ce49x
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: conflict_monitoring
+    ports:
+      - "5432:5432"
+    volumes:
+      - ce49x_postgres_data:/var/lib/postgresql/data
+
+volumes:
+  ce49x_postgres_data:
+

@@ -1,0 +1,2 @@
+test,metric,group_1,group_1_n,group_1_mean,group_2,group_2_n,group_2_mean,t_statistic,p_value
+Welch t-test,total_frp,conflict_associated,2477,618.6295155429955,not_conflict_associated,427,13.707564402810304,2.3140904614088282,0.020744232150661828

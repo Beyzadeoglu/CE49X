@@ -1,0 +1,15 @@
+{
+  "firms_rows": 265321,
+  "news_rows": 3724,
+  "thermal_events": 2904,
+  "event_matches": 135311,
+  "top_association_region": "Ukraine_Black_Sea",
+  "top_association_rate": 0.9872053872053872,
+  "top_frp_region": "Persian_Gulf",
+  "top_frp_mean": 1494.0587133550487,
+  "blind_spot_region": "Eastern_Mediterranean",
+  "blind_spot_score": 0.9710144927536232,
+  "best_model": "SVM",
+  "best_model_f1": 0.9501039501039501,
+  "hypothesis_p_value": 0.020744232150661828
+}
